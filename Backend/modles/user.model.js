@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
 
 //////////////////////////////////// ab hum yha pr khuch methods generate krenge  ya bna lenge 
 userSchema.methods.generateAuthToken = function(){
-    const token = jwt.sign({_id: this._id}, process.env.JWT_SECRET) //is token ke ander data sirf user ki id rhene wali hai
+    const token = jwt.sign({_id: this._id}, process.env.JWT_SECRET, {expiresIn: '24h'}) //is token ke ander data sirf user ki id rhene wali hai
     return token; // aur fir ye token yha se return kr dega jisko yha se khai bhi aage use kr shakte hai user.controller.js vgera me 
 }
 

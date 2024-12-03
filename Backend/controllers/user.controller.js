@@ -1,6 +1,8 @@
 const userModel = require("../modles/user.model")
 const userService = require('../services/user.service')
 const {validationResult} = require('express-validator')
+const BlacklistTokenModel = require('../modles/blacklistToken.model')
+const blacklistTokenModel = require("../modles/blacklistToken.model")
 
 
 ////////////////////////controller for register
@@ -72,6 +74,26 @@ module.exports.loginUser = async(req, res, next)=>{
 
   const token = user.generateAuthToken();
 
+  res.cookie('token', token)
+
   res.status(200).json({token, user});
-  
+
+}
+
+
+
+//////////////////////////////////controller for get user profile
+module.exports.getUserProfile = async(req, res, next)=>{
+  res.status(200).json(req.user);// jo req.user humne middleware me set kiya hoga vo chala jaayega as a response aapki profile pe 
+}
+
+// for logout
+module.exports.logoutUser = async(req, res, next)=>{
+  res.clearCookie('token');
+  //cookie to hum clear krenge hi krenge ,lekin saath me is token ko bhi clear kr dhenge 
+  const token = req.cookies.token || req.headers.authorization.split(' ')[1];
+
+  await blacklistTokenModel.create({token})
+
+  res.status(200).json({message:"Logged Out"})
 }

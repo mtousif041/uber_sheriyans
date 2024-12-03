@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
+const cookieParser = require('cookie-parser')
 const express = require('express');
 const cors = require('cors')
 const userRoutes = require('./routes/user.routes');
@@ -15,7 +16,7 @@ app.use(cors()); //abi ke liye hum saari website se request accept kr rhae honge
 ///ye do lines route ko configre krne ke liye use ki jaati hai jese ki app.use('/users', userRoutes) ke liye, aur naaki ke liye bhi 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-
+app.use(cookieParser());
 
 
 

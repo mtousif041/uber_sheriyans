@@ -1,0 +1,8 @@
+////////////////////////////////////backend///////////////////////////////////
+npm i init -y
+npm i express
+npm i dotenv cors
+npm nodemon
+
+
+"main": "index.js", change in "main": "server.js",

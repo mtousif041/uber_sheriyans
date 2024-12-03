@@ -22,6 +22,13 @@ const {fullname, email, password} = req.body;
 // aur fir niche bhi direct firstname, lastname, dene ki bjaye aise dhenge  firstname: fullname.firstname, lastname:fullname.lastname,
 
 
+const isUserAlreadyExist = await userModel.findOne({email})// yaani check krenge ki is email se koi captain already register to nhai haina 
+
+   if(isUserAlreadyExist){
+    return res.status(400).json({message:'user already exist'})
+   }
+
+
   
   const hashedPassword = await userModel.hashPassword(password) // ye user.model.js ke hashPassword method ko use kr rha hai yha pr fir password ko hashed kr rha hai , jisse aapko hashed password mil jaayega 
 

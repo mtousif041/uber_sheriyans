@@ -2,6 +2,8 @@ const userModel = require("../modles/user.model")
 const userService = require('../services/user.service')
 const {validationResult} = require('express-validator')
 
+
+////////////////////////controller for register
 module.exports.registerUser = async(req, res, next)=>{
   const errors = validationResult(req); // user.routes.js me humne jo bhi validation lgaye the agr unme se khuch bhi galat hoga to vo        humko is req(request) me mil jaayega
 
@@ -43,4 +45,33 @@ const {fullname, email, password} = req.body;
   })
 
 
+}
+
+
+///////////////////////////////controller for login
+module.exports.loginUser = async(req, res, next)=>{
+  const errors = validationResult(req);
+  if(!errors.isEmpty()){
+    return res.status(400).json({errors: errors.array()});
+  }
+
+  const {email, password} =  req.body;
+
+  const user = await userModel.findOne({email}).select('+password') // passord ko humne model me select false krdiya tha isliye ab isko wapas se + krna pdega
+
+
+  if(!user){
+    return res.status(401).json({message:'Invalid email or password'});
+  }
+
+  const isMatch = await user.comparePassword(password);
+    
+  if(!isMatch){
+    return res.status(401).json({message:'Invalid email or password'});
+  }
+
+  const token = user.generateAuthToken();
+
+  res.status(200).json({token, user});
+  
 }

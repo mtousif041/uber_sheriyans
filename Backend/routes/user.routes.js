@@ -11,4 +11,11 @@ router.post('/register', [
 ], userController.registerUser)
 
 
+router.post('/login', [
+    body('email').isEmail().withMessage('Invalid Emial'), //yaani body ke ander jobhi email  aayega use check krlo ki vo isEmail hai, agr nhai hua to invalid emial ka message bhej do.
+    body('password').isLength({min:6}).withMessage('Password must be at least 6 characters long')
+],
+userController.loginUser)
+
+
 module.exports = router;

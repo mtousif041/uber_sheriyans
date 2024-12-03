@@ -1,8 +1,13 @@
+//NOTE is video me copilet ki help se docs kese create krta hai ye bhi btaya gya hai 
+
 ////////////////////////////////////backend///////////////////////////////////
 npm i init -y
 npm i express
 npm i dotenv cors
 npm nodemon
+npm i mongoose
+npm i bcrypt jsonwebtoken 
+npm i express-validator // isse ye check krenge ki user ne jo data bheja hai vo vaalidate hai ya nhai 
 
 
 "main": "index.js", change in "main": "server.js",

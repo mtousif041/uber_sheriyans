@@ -96,10 +96,11 @@ module.exports.getUserProfile = async(req, res, next)=>{
 
 // for logout
 module.exports.logoutUser = async(req, res, next)=>{
-  res.clearCookie('token');
   //cookie to hum clear krenge hi krenge ,lekin saath me is token ko bhi clear kr dhenge 
   const token = req.cookies.token || req.headers.authorization.split(' ')[1];
-
+  
+  res.clearCookie('token');
+  
   await blacklistTokenModel.create({token})
 
   res.status(200).json({message:"Logged Out"})

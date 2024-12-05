@@ -22,7 +22,7 @@ const UserContextt = ({ children }) => {
     //   <div>{children}</div> // ab agr me chata hu ki me saara data sub jgha provide kr pau to is line ab khuch aise likh dhnge
     <div>
       {/* <UserDataContext.Provider value={user}>  C1120 */}
-      <UserDataContext.Provider value={[user, setUser]}>
+      <UserDataContext.Provider value={{ user, setUser }}>
         {children}
       </UserDataContext.Provider>
     </div>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { UserDataContext } from "../context/UserContextt";
 
 const UserSignup = () => {
   const [email, setEmail] = useState(""); // inko two way binding bhi khete hai
@@ -8,19 +10,37 @@ const UserSignup = () => {
   const [lastName, setLastName] = useState("");
   const [userData, setUserData] = useState({});
 
-  const submitHandler = (e) => {
+  const navigate = useNavigate();
+  const { user, setUser } = React.useContext(UserDataContext);
+
+  const submitHandler = async (e) => {
     e.preventDefault();
     // console.log(email, password);
 
-    setUserData({
-      fullName: {
-        firstName: firstName,
-        lastName: lastName,
+    const newUser = {
+      fullname: {
+        firstname: firstName,
+        lastname: lastName,
       },
       email: email,
       password: password,
-    });
-    console.log(userData);
+    };
+    // console.log(userData);
+
+    /////
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/users/register`,
+      newUser
+    );
+
+    if (response.status === 201) {
+      const data = response.data;
+
+      //ab agr muje data ko use krna hai to context ka use krke krenge
+      setUser(data.user);
+      localStorage.setItem("token", data.token);
+      navigate("/login");
+    }
 
     setEmail("");
     setFirstName("");
@@ -91,7 +111,7 @@ const UserSignup = () => {
               placeholder=" enter password"
             />
             <button className="bg-[#111] font-semibold mb-3 rounded px-4 w-full text-white py-2  placeholder:text-base">
-              Login
+              Create account
             </button>
             <div>
               <p className="text-center">

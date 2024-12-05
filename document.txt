@@ -12,3 +12,33 @@ npm i cookie-parser
 
 
 "main": "index.js", change in "main": "server.js",
+
+
+
+/////////////////////////////FrontEnd////////////////////
+npm create vite@latest
+ cd Frontend
+  npm install
+  npm run dev
+
+
+  ////for tailwind css 
+  npm install -D tailwindcss postcss autoprefixer
+  npx tailwindcss init -p
+
+  //in tailwind.config.js
+  me content:[] ko replace krna hai isse
+    content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+
+
+
+  ///in index.css
+  @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+npm i react-router-dom // for routing in app.jsx // aur main.jsx me bhi apko wrap krna pdega 

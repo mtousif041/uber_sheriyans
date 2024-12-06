@@ -43,3 +43,6 @@ npm create vite@latest
 
 npm i react-router-dom // for routing in app.jsx // aur main.jsx me bhi apko wrap krna pdega 
 npm i axios
+npm i gsap // for animation dene ke liye
+npm i @gsap/react
+npm i remixicon --save // for icons using from remixicon.com

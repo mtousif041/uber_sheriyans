@@ -9,9 +9,14 @@ npm i mongoose
 npm i bcrypt jsonwebtoken 
 npm i express-validator // isse ye check krenge ki user ne jo data bheja hai vo vaalidate hai ya nhai 
 npm i cookie-parser
+npm i axios
 
 
 "main": "index.js", change in "main": "server.js",
+
+
+//google Maps add krne ke liye 7:00:00
+console.cloude.google.com
 
 
 
